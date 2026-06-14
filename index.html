@@ -242,65 +242,6 @@
     /* ── Project type: App ─────────────────────── */
     .type-app { color: #56B4E9; }
 
-    /* ── CV ─────────────────────────────────────── */
-    .cv-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-    }
-
-    @media (max-width: 640px) {
-      .cv-grid { grid-template-columns: 1fr; gap: 2rem; }
-    }
-
-    .cv-col h3 {
-      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--teal);
-      margin-bottom: 1.25rem;
-    }
-
-    .cv-entry {
-      position: relative;
-      padding-left: 1.25rem;
-      margin-bottom: 1.75rem;
-    }
-
-    .cv-entry::before {
-      content: '';
-      position: absolute; left: 0; top: 6px;
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--teal);
-    }
-
-    .cv-entry::after {
-      content: '';
-      position: absolute; left: 2.5px; top: 14px;
-      width: 1px; bottom: -10px;
-      background: rgba(93, 202, 165, 0.15);
-    }
-
-    .cv-entry:last-child::after { display: none; }
-
-    .cv-role {
-      font-size: 0.95rem; font-weight: 600; color: var(--cream);
-      margin-bottom: 0.15rem;
-    }
-
-    .cv-org {
-      font-size: 0.85rem; color: var(--teal2);
-      margin-bottom: 0.2rem;
-    }
-
-    .cv-date {
-      font-size: 0.75rem; color: var(--muted);
-      margin-bottom: 0.4rem;
-    }
-
-    .cv-detail {
-      font-size: 0.85rem; color: var(--muted); line-height: 1.55;
-    }
-
     /* ── Resume ────────────────────────────────── */
     #resume {
       text-align: center; padding: 4rem 2rem;
@@ -370,7 +311,6 @@
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#projects">Projects</a></li>
-    <li><a href="#cv">CV</a></li>
     <li><a href="#resume">Resume</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
@@ -453,6 +393,9 @@
       <p class="project-desc">
         Multi-user Streamlit dashboard for analysing household electricity consumption from Israeli IEC exports. Runs a full pipeline: preprocessing, K-means clustering, four outlier-detection methods, weather correlation via Open-Meteo, and a discount plan comparison engine. Every browser session is fully isolated — no data leaks between users.
       </p>
+      <p style="font-size:0.78rem; color:var(--teal1); margin:0.4rem 0 0.8rem;">
+        ⚠️ Demo mode: the Savings Calculator requires a real IEC export file — upload yours to unlock it.
+      </p>
       <div class="project-footer">
         <div class="tech-pills">
           <span class="tech-pill">Python</span>
@@ -461,7 +404,10 @@
           <span class="tech-pill">Plotly</span>
           <span class="tech-pill">pandas</span>
         </div>
-        <a href="https://github.com/youlia-denisov" target="_blank" class="card-link">View →</a>
+        <div style="display:flex; gap:1rem; align-items:center;">
+          <a href="https://ds-portfolio-7va4xdxzmrbb8psjkdphfh.streamlit.app/" target="_blank" class="card-link">Live demo →</a>
+          <a href="https://github.com/YouliaXX" target="_blank" class="card-link">GitHub →</a>
+        </div>
       </div>
     </div>
 
@@ -499,6 +445,23 @@
       </div>
     </div>
 
+    <!-- ML 2 -->
+    <div class="project-card">
+      <p class="project-type type-ml">Machine learning</p>
+      <p class="project-title">Project title here</p>
+      <p class="project-desc">
+        Describe your second ML project. What was the target variable? What was the model's performance? Any interesting findings?
+      </p>
+      <div class="project-footer">
+        <div class="tech-pills">
+          <span class="tech-pill">scikit-learn</span>
+          <span class="tech-pill">Python</span>
+          <span class="tech-pill">SQL</span>
+        </div>
+        <a href="#" class="card-link">View →</a>
+      </div>
+    </div>
+
     <!-- PowerBI -->
     <div class="project-card">
       <p class="project-type type-powerbi">Power BI</p>
@@ -515,7 +478,24 @@
         <a href="#" class="card-link">View →</a>
       </div>
     </div>
-   
+
+    <!-- PowerBI 2 -->
+    <div class="project-card">
+      <p class="project-type type-powerbi">Power BI</p>
+      <p class="project-title">Project title here</p>
+      <p class="project-desc">
+        Describe your second dashboard — the KPIs it tracks, the audience it serves, and any interesting design decisions you made.
+      </p>
+      <div class="project-footer">
+        <div class="tech-pills">
+          <span class="tech-pill">Power BI</span>
+          <span class="tech-pill">DAX</span>
+          <span class="tech-pill">Excel</span>
+        </div>
+        <a href="#" class="card-link">View →</a>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -525,9 +505,9 @@
 <section id="resume">
   <div class="resume-box">
     <p class="section-label" style="text-align:center;">Resume</p>
-    <h2 style="text-align:center; margin-bottom:0.5rem;">Want the full picture?</h2>
-    <p>Download my CV for a full summary of my education, experience, and skills.</p>
-    <a href="resume.pdf" class="btn btn-primary" download>Download CV (PDF)</a>
+    <h2 style="margin-bottom:0.75rem;">Download my CV</h2>
+    <p>A one-page summary of my background, skills, and projects.</p>
+    <a href="resume.pdf" download class="btn btn-primary">Download PDF</a>
   </div>
 </section>
 
@@ -542,7 +522,7 @@
 
     <a href="mailto:youlia.denisov@gmail.com" class="contact-link">
       <svg viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
-      Gmail
+      youlia.denisov@gmail.com
     </a>
 
     <a href="https://linkedin.com/in/youliadenisov-phd" target="_blank" class="contact-link">
