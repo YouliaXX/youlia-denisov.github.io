@@ -1,0 +1,28 @@
+# macOS
+.DS_Store
+.AppleDouble
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Python (for local notebook work)
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.env
+venv/
+.venv/
+
+# Power BI local cache
+*.pbix.lock
+
+# Temp / logs
+*.log
+tmp/
