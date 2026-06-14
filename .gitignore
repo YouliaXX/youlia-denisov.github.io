@@ -23,6 +23,9 @@ venv/
 # Power BI local cache
 *.pbix.lock
 
+# Streamlit
+.streamlit/secrets.toml
+
 # Temp / logs
 *.log
 tmp/
