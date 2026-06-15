@@ -10,10 +10,10 @@ Personal portfolio site — showcasing data science, machine learning, and Power
 
 | Type | Project | Tools |
 |------|---------|-------|
-| STREAMLIT APP | *(WattWise)* | Python, pandas, seaborn, plotly, streamlit |
+| STREAMLIT APP | **WattWise** - Electricity consumption and savings calculator | Python, pandas, seaborn, plotly, streamlit |
 | EDA | *(add project name)* | Python, matplotlib |
-| ML | *(add project name)* | scikit-learn, pandas |
-| Power BI | *(add project name)* | Power BI, DAX, Excel |
+| ML | **Patient outcome prediction** | scikit-learn, pandas, plotly, ensemble models |
+| Power BI | **Gene-edited product dashboard** | Power BI, DAX, Excel |
 
 ---
 
