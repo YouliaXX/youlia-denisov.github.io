@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NGT Tracker — Gene-edited Agricultural Products</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #0D1B2A;
+      --navy2:  #132233;
+      --navy3:  #1C3048;
+      --teal:   #1D9E75;
+      --teal2:  #5DCAA5;
+      --cream:  #F5F0E8;
+      --muted:  #9BBCB0;
+      --text:   #D6EDE7;
+      --amber:  #EF9F27;
+      --radius: 10px;
+      --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font); background: var(--navy); color: var(--text); line-height: 1.7; }
+    a { color: var(--teal2); text-decoration: none; }
+    a:hover { color: var(--cream); }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(13, 27, 42, 0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(93, 202, 165, 0.12);
+      padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+    }
+    .nav-back {
+      font-size: 0.875rem; color: var(--muted);
+      display: flex; align-items: center; gap: 6px;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--cream); }
+    .nav-back svg { width: 14px; height: 14px; stroke: currentColor; fill: none; }
+    .nav-logo { font-size: 1rem; font-weight: 700; color: var(--teal2); letter-spacing: 0.04em; }
+    .nav-cta {
+      font-size: 0.8rem; font-weight: 600;
+      background: var(--teal); color: var(--navy);
+      padding: 0.4rem 1rem; border-radius: 6px;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--teal2); color: var(--navy); }
+
+    /* ── Hero ── */
+    .hero {
+      min-height: 60vh;
+      display: flex; flex-direction: column; justify-content: center;
+      max-width: 900px; margin: 0 auto;
+      padding: 8rem 2rem 4rem;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--teal2);
+      border: 1px solid rgba(93, 202, 165, 0.3);
+      border-radius: 20px; padding: 4px 12px;
+      margin-bottom: 1.5rem; width: fit-content;
+    }
+    .hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--teal2); }
+    .hero-title {
+      font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+      font-weight: 700; color: var(--cream);
+      line-height: 1.1; margin-bottom: 1rem;
+    }
+    .hero-title span { color: var(--teal2); }
+    .hero-subtitle {
+      font-size: 1.05rem; color: var(--muted);
+      max-width: 600px; margin-bottom: 2.5rem; line-height: 1.65;
+    }
+    .btn-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-block; padding: 0.7rem 1.6rem;
+      border-radius: 6px; font-size: 0.9rem; font-weight: 500;
+      transition: all 0.2s;
+    }
+    .btn-primary { background: var(--teal); color: var(--navy); }
+    .btn-primary:hover { background: var(--teal2); color: var(--navy); }
+    .btn-outline { border: 1px solid rgba(93, 202, 165, 0.4); color: var(--teal2); }
+    .btn-outline:hover { border-color: var(--teal2); background: rgba(93, 202, 165, 0.06); color: var(--cream); }
+
+    /* ── Sections ── */
+    .section { max-width: 900px; margin: 0 auto; padding: 4rem 2rem; }
+    hr.divider { border: none; border-top: 1px solid rgba(93, 202, 165, 0.1); max-width: 900px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--teal); margin-bottom: 0.5rem;
+    }
+    h2 { font-size: 1.75rem; font-weight: 600; color: var(--cream); margin-bottom: 1rem; }
+    h3 { font-size: 1.05rem; font-weight: 600; color: var(--cream); margin-bottom: 0.4rem; }
+    p.body { color: var(--muted); font-size: 0.95rem; line-height: 1.75; margin-bottom: 1rem; }
+
+    /* ── What is NGT ── */
+    .ngt-explainer {
+      background: var(--navy2);
+      border: 1px solid rgba(93, 202, 165, 0.12);
+      border-left: 3px solid var(--teal);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.75rem;
+      margin-top: 1.5rem;
+    }
+    .ngt-explainer h3 { font-size: 0.9rem; color: var(--teal2); margin-bottom: 0.5rem; }
+    .ngt-explainer p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
+
+    /* ── Feature cards ── */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem; margin-top: 2rem;
+    }
+    .feature-card {
+      background: var(--navy2);
+      border: 1px solid rgba(93, 202, 165, 0.1);
+      border-radius: var(--radius); padding: 1.4rem;
+      transition: border-color 0.2s;
+    }
+    .feature-card:hover { border-color: rgba(93, 202, 165, 0.35); }
+    .feature-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+    .feature-card h3 { font-size: 0.95rem; margin-bottom: 0.4rem; }
+    .feature-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+
+    /* ── Insight callouts ── */
+    .insight-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem; }
+    .insight-card {
+      background: rgba(29, 158, 117, 0.06);
+      border: 1px solid rgba(93, 202, 165, 0.18);
+      border-radius: var(--radius); padding: 1.5rem;
+    }
+    .insight-card .stat { font-size: 2.2rem; font-weight: 800; color: var(--teal2); line-height: 1; margin-bottom: 0.5rem; }
+    .insight-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+
+    /* ── Pipeline steps (Power BI → Web) ── */
+    .pipeline { margin-top: 2rem; display: flex; flex-direction: column; gap: 0; }
+    .pipeline-step { display: grid; grid-template-columns: 48px 1fr; gap: 1.25rem; position: relative; }
+    .pipeline-step:not(:last-child) .step-connector::after {
+      content: ''; position: absolute;
+      top: 48px; left: 23px;
+      width: 2px; height: calc(100% - 16px);
+      background: rgba(93, 202, 165, 0.15);
+    }
+    .step-connector { display: flex; flex-direction: column; align-items: center; position: relative; }
+    .step-num {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--navy3); border: 2px solid var(--teal);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem; font-weight: 700; color: var(--teal2);
+      flex-shrink: 0; z-index: 1;
+    }
+    .step-body { padding: 0.6rem 0 1.75rem; }
+    .step-body h3 { font-size: 0.95rem; color: var(--cream); margin-bottom: 0.25rem; }
+    .step-body p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+    .step-tag {
+      display: inline-block; font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 2px 8px; border-radius: 4px; margin-bottom: 0.4rem;
+    }
+    .tag-new   { background: rgba(29,158,117,0.12);  color: var(--teal2); }
+    .tag-kept  { background: rgba(239,159,39,0.12);  color: var(--amber); }
+
+    /* ── Tech stack ── */
+    .tech-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 1.5rem; }
+    .tech-pill {
+      font-size: 0.82rem; padding: 6px 14px; border-radius: 20px;
+      background: rgba(13, 27, 42, 0.8);
+      border: 1px solid rgba(93, 202, 165, 0.2);
+      color: var(--teal2);
+    }
+
+    /* ── CTA block ── */
+    .cta-block {
+      background: var(--navy2);
+      border: 1px solid rgba(93, 202, 165, 0.15);
+      border-radius: var(--radius); padding: 3rem 2rem;
+      text-align: center; margin: 4rem auto; max-width: 900px;
+    }
+    .cta-block h2 { margin-bottom: 0.75rem; }
+    .cta-block p { color: var(--muted); margin-bottom: 2rem; }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid rgba(93, 202, 165, 0.08);
+      text-align: center; padding: 2rem;
+      font-size: 0.8rem; color: rgba(155, 188, 176, 0.4);
+    }
+    footer a { color: rgba(93, 202, 165, 0.5); }
+    footer a:hover { color: var(--teal2); }
+
+    @media (max-width: 640px) {
+      nav { padding: 0 1rem; }
+      .hero { padding: 7rem 1.25rem 3rem; }
+      .section { padding: 3rem 1.25rem; }
+      .insight-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-back">
+    <svg viewBox="0 0 24 24" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    Portfolio
+  </a>
+  <span class="nav-logo">NGT Tracker</span>
+  <a href="gene-editing-tracker/docs/index.html" class="nav-cta">Open Dashboard ↗</a>
+</nav>
+
+<!-- Hero -->
+<div class="hero">
+  <span class="hero-badge">Interactive Dashboard</span>
+  <h1 class="hero-title">NGT Tracker —<br><span>Gene-edited Agricultural Products</span></h1>
+  <p class="hero-subtitle">
+    A global map of 206 CRISPR/NGT products across 60 organisms and 17 countries — tracking commercial
+    progress from lab discovery to market. Rebuilt from Power BI into a fully browser-based dashboard.
+  </p>
+  <div class="btn-group">
+    <a href="gene-editing-tracker/docs/index.html" class="btn btn-primary">Open live dashboard ↗</a>
+    <a href="https://github.com/youlia-denisov/DS-portfolio" target="_blank" class="btn btn-outline">View on GitHub</a>
+  </div>
+</div>
+
+<hr class="divider" />
+
+<!-- What is NGT -->
+<section class="section">
+  <p class="section-label">Background</p>
+  <h2>What is NGT?</h2>
+  <p class="body">
+    New Genomic Techniques (NGT) — primarily CRISPR/Cas and related tools — allow targeted, precise edits
+    to an organism's own genome without introducing foreign DNA. Unlike traditional GMOs, NGT products are
+    increasingly regulated differently across jurisdictions, making them commercially and politically relevant
+    for global agriculture.
+  </p>
+  <p class="body">
+    This tracker maps the full pipeline from Discovery to Market, giving a bird's-eye view of where
+    investment, research, and regulatory progress are concentrated — and which crops and organisms are
+    furthest along.
+  </p>
+  <div class="ngt-explainer">
+    <h3>Why this matters now</h3>
+    <p>43% of the 206 tracked products are already at Approved or Marketing stage. This is no longer just
+    a research story — it's an emerging commercial market, shaped by climate pressure, regulatory reform,
+    and concentrated investment in a handful of organisms and trait categories.</p>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- Dashboard overview -->
+<section class="section">
+  <p class="section-label">Page 1 — Overview</p>
+  <h2>What the dashboard shows</h2>
+  <p class="body">
+    The overview page answers: <em>what is being developed, by whom, and how far along is it?</em>
+    Six interactive panels update together when you apply the organism, country, or trait category filters.
+  </p>
+
+  <div class="feature-grid">
+    <div class="feature-card">
+      <div class="feature-icon">💰</div>
+      <h3>Commercial Weight</h3>
+      <p>$5.3 bn combined company net worth across all 206 products — a proxy for the investment
+         concentrated in this space.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📊</div>
+      <h3>Pipeline Drill-Down</h3>
+      <p>A single stacked bar switchable by Development Stage · Kingdom · Company Type · Technology.
+         Quickly surfaces pipeline composition from any angle.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🌾</div>
+      <h3>Category Breakdown</h3>
+      <p>Grain (47), Vegetable (40), Livestock (38), Fruit tree (17) — plants dominate, but livestock
+         represents a significant and advanced share.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🏢</div>
+      <h3>Stage by Company Type</h3>
+      <p>Academic institutions drive the largest pipeline (98 products), but private companies are
+         more concentrated in later development stages.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🧬</div>
+      <h3>Top Trait Categories</h3>
+      <p>Biotic stress tolerance (54) and Improved quality (51) together account for ~50% of all
+         traits — driven by climate pressure and consumer demand.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🎬</div>
+      <h3>Bar Chart Race</h3>
+      <p>Animated video showing how product counts per organism evolved from 2016 to 2024 — a quick
+         read on which crops attracted R&amp;D effort over time.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- Page 2 -->
+<section class="section">
+  <p class="section-label">Page 2 — Organism Drill-Down</p>
+  <h2>Which organisms are furthest along?</h2>
+  <p class="body">
+    The second page answers: <em>which organisms lead the pipeline, and what does the stage
+    distribution look like within each category?</em>
+  </p>
+
+  <div class="feature-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🔬</div>
+      <h3>Per-organism stage split</h3>
+      <p>Cattle (17), Tomato (17), and Wheat (16) lead — notable that both livestock and staple grains
+         are well-represented at advanced stages.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📈</div>
+      <h3>Category stage distribution</h3>
+      <p>Fruit tree (56% Proof-of-Concept) and Vegetable (53% PoC) are early-stage heavy. Livestock
+         and Grasses show more advanced-stage products.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📋</div>
+      <h3>Product details table</h3>
+      <p>Scrollable table with organism image, company description, and applied gene editing technology
+         per product — for deep-diving individual entries.</p>
+    </div>
+  </div>
+
+  <!-- Key insights -->
+  <div class="insight-grid" style="margin-top:2.5rem;">
+    <div class="insight-card">
+      <div class="stat">43%</div>
+      <p>of tracked products are at <strong style="color:var(--cream)">Approved or Marketing</strong> stage — this is an emerging commercial market, not just a research pipeline.</p>
+    </div>
+    <div class="insight-card">
+      <div class="stat">54%</div>
+      <p>of <strong style="color:var(--cream)">Aquaculture</strong> products are at Large-scale trials — suggesting a faster path to market than most plant categories.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- Power BI → Web -->
+<section class="section">
+  <p class="section-label">From Power BI to the Web</p>
+  <h2>What the rebuild added</h2>
+  <p class="body">
+    The original Power BI report required a licence to view and couldn't be shared as a URL.
+    The web rebuild keeps all the original analysis while adding features that weren't possible in Power BI.
+  </p>
+
+  <div class="pipeline">
+    <div class="pipeline-step">
+      <div class="step-connector"><div class="step-num">+</div></div>
+      <div class="step-body">
+        <span class="step-tag tag-new">New</span>
+        <h3>World map</h3>
+        <p>Geographic distribution of products by country — a view not present in the original Power BI report, built with Plotly's choropleth layer.</p>
+      </div>
+    </div>
+    <div class="pipeline-step">
+      <div class="step-connector"><div class="step-num">+</div></div>
+      <div class="step-body">
+        <span class="step-tag tag-new">New</span>
+        <h3>Bar chart race video</h3>
+        <p>Animated MP4 showing organism product counts evolving 2016–2024. Provides temporal context that static charts can't convey.</p>
+      </div>
+    </div>
+    <div class="pipeline-step">
+      <div class="step-connector"><div class="step-num">+</div></div>
+      <div class="step-body">
+        <span class="step-tag tag-new">New</span>
+        <h3>No licence required</h3>
+        <p>Runs entirely in the browser as a static HTML file — shareable as a URL, no Power BI Pro subscription needed to view.</p>
+      </div>
+    </div>
+    <div class="pipeline-step">
+      <div class="step-connector"><div class="step-num">≈</div></div>
+      <div class="step-body">
+        <span class="step-tag tag-kept">Kept</span>
+        <h3>Cross-linked interactive filters</h3>
+        <p>Organism · Country · Trait category filters — all charts update in real time, matching the interactivity of the original Power BI slicers.</p>
+      </div>
+    </div>
+    <div class="pipeline-step">
+      <div class="step-connector"><div class="step-num">≈</div></div>
+      <div class="step-body">
+        <span class="step-tag tag-kept">Kept</span>
+        <h3>Full pipeline analysis</h3>
+        <p>All original DAX measures and queries translated into embedded JSON + vanilla JavaScript — same analytical depth, zero backend.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- Tech stack -->
+<section class="section">
+  <p class="section-label">Tech Stack</p>
+  <h2>Built with</h2>
+  <p class="body">No backend, no server, no build step — everything runs in the browser from a single HTML file.</p>
+  <div class="tech-grid">
+    <span class="tech-pill">Plotly.js 2.27</span>
+    <span class="tech-pill">wordcloud2.js</span>
+    <span class="tech-pill">Vanilla JavaScript</span>
+    <span class="tech-pill">HTML / CSS</span>
+    <span class="tech-pill">Microsoft Power BI</span>
+    <span class="tech-pill">Inter (Google Fonts)</span>
+    <span class="tech-pill">GitHub Pages</span>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-block">
+  <h2>Explore the tracker</h2>
+  <p>Filter by organism, country, or trait category and see how the global NGT pipeline is structured.</p>
+  <div class="btn-group" style="justify-content:center;">
+    <a href="gene-editing-tracker/docs/index.html" class="btn btn-primary">Open Dashboard ↗</a>
+    <a href="index.html" class="btn btn-outline">← Back to portfolio</a>
+  </div>
+</div>
+
+<footer>
+  <p>Part of <a href="index.html">Youlia Denisov's portfolio</a> · Built with Plotly.js &amp; vanilla JS · Data from public regulatory sources</p>
+</footer>
+
+</body>
+</html>
