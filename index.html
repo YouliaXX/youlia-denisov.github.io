@@ -143,6 +143,31 @@
       max-width: 900px; margin: 0 auto;
     }
 
+    /* ── Artwork banner ────────────────────────── */
+    .artwork-banner {
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+      line-height: 0;
+    }
+    .artwork-banner img {
+      width: 100%;
+      max-height: 420px;
+      object-fit: cover;
+      object-position: center top;
+      filter: invert(1);
+      opacity: 0.55;
+      display: block;
+    }
+    .artwork-credit {
+      position: absolute;
+      bottom: 0.6rem; right: 1rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+    }
+
     /* ── About ─────────────────────────────────── */
     #about .about-grid {
       display: grid;
@@ -330,6 +355,12 @@
   <p class="scroll-hint">Scroll to explore</p>
 </section>
 
+<!-- Artwork banner -->
+<div class="artwork-banner">
+  <img src="gene-editing-tracker/idan-artwork.jpg" alt="Landscape sketch — cliffs, waterfalls, and an aqueduct" />
+  <span class="artwork-credit">© Original artwork by Idan Denisov. All rights reserved.</span>
+</div>
+
 <hr class="divider" />
 
 <!-- About -->
@@ -407,7 +438,7 @@
         <div style="display:flex; flex-direction:column; gap:0.5rem; align-items:flex-start;">
           <a href="https://ds-portfolio-7va4xdxzmrbb8psjkdphfh.streamlit.app/" target="_blank" class="card-link">Live demo →</a>
           <a href="wattwise.html" class="card-link">How it works →</a>
-          <a href="https://github.com/youlia-denisov" target="_blank" class="card-link">GitHub →</a>
+          <a href="https://github.com/youlia-denisov/DS-portfolio/tree/main/streamlit-multiuser-app" target="_blank" class="card-link">GitHub →</a>
         </div>
       </div>
     </div>
@@ -446,10 +477,12 @@
           <span class="tech-pill">JavaScript</span>
           <span class="tech-pill">Power BI</span>
           <span class="tech-pill">HTML/CSS</span>
+          <span class="tech-pill">DAX</span>
         </div>
         <div style="display:flex; flex-direction:column; gap:0.5rem; align-items:flex-start;">
           <a href="gene-editing-tracker/docs/index.html" class="card-link">Live dashboard →</a>
           <a href="gene-editing-tracker.html" class="card-link">How it works →</a>
+          <a href="https://github.com/youlia-denisov/DS-portfolio/tree/main/gene-editing-tracker" target="_blank" class="card-link">GitHub →</a>
         </div>
       </div>
     </div>
